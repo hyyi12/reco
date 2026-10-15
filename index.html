@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Open in Browser</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:#0f0a14;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    min-height:100dvh;
+    padding:env(safe-area-inset-top) env(safe-area-inset-right)
+            env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overflow:hidden;
+    user-select:none;
+    -webkit-user-select:none;
+    position:relative;
+  }
+  /* purple radial glow behind content */
+  body::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse 85% 55% at 50% 42%,
+      rgba(147,51,234,.28), rgba(147,51,234,.08) 45%, transparent 70%);
+    pointer-events:none;
+  }
+  .container{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    padding:24px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  /* glowing arrow icon */
+  .icon{
+    width:clamp(76px,22vw,110px);
+    height:clamp(76px,22vw,110px);
+    border-radius:28%;
+    border:1.5px solid rgba(168,85,247,.5);
+    background:linear-gradient(160deg, rgba(168,85,247,.14), rgba(168,85,247,.03));
+    box-shadow:0 0 40px rgba(147,51,234,.35), inset 0 0 24px rgba(147,51,234,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:clamp(28px,7vh,56px);
+    animation:float 3s ease-in-out infinite;
+  }
+  .icon svg{width:44%;height:44%}
+  @keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-6px)}
+  }
+  h1{
+    font-size:clamp(40px,11vw,64px);
+    font-weight:800;
+    line-height:1.05;
+    letter-spacing:-1px;
+  }
+  h1 .gradient{
+    background:linear-gradient(90deg,#c084fc,#a855f7);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .subtitle{
+    margin-top:clamp(14px,3vh,22px);
+    font-size:clamp(15px,4vw,17px);
+    line-height:1.5;
+    color:#9a93a8;
+    max-width:290px;
+    font-weight:500;
+  }
+  .btn{
+    margin-top:clamp(30px,6vh,48px);
+    width:100%;
+    max-width:320px;
+    padding:18px 20px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(90deg,#e020e8 0%,#a855f7 100%);
+    color:#fff;
+    font-size:clamp(16px,4.2vw,18px);
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    cursor:pointer;
+    touch-action:manipulation;
+    box-shadow:0 8px 32px rgba(168,85,247,.45);
+    transition:transform .15s ease;
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  .btn:active{transform:scale(.97)}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 8px 32px rgba(168,85,247,.45)}
+    50%{box-shadow:0 8px 42px rgba(168,85,247,.7)}
+  }
+  .footer{
+    margin-top:clamp(26px,5vh,40px);
+    font-size:clamp(13px,3.6vw,15px);
+    color:#6f6879;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .footer .dot{width:4px;height:4px;border-radius:50%;background:#6f6879}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <defs>
+        <linearGradient id="ag" x1="0" y1="24" x2="24" y2="0">
+          <stop offset="0%" stop-color="#c084fc"/>
+          <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+      </defs>
+      <line x1="6" y1="18" x2="18" y2="6" stroke="url(#ag)"/>
+      <polyline points="8 6 18 6 18 16" stroke="url(#ag)"/>
+    </svg>
+  </div>
+
+  <h1>Open in<br><span class="gradient">Browser</span></h1>
+
+  <p class="subtitle">Tap Continue to open this page in your browser for the full experience.</p>
+
+  <button class="btn" onclick="openBrowser()">Continue</button>
+
+  <div class="footer">
+    <span>Safari</span><span class="dot"></span>
+    <span>Chrome</span><span class="dot"></span>
+    <span>Secure</span>
+  </div>
+
+</div>
+
+<script>
+  // 👇 PUT YOUR MAIN LANDER URL HERE
+  var dest = "https://your-main-lander.com" + window.location.search;
+
+  function openBrowser(){
+    var ua = navigator.userAgent;
+    if (/android/i.test(ua)) {
+      // ANDROID → force Chrome
+      var stripped = dest.replace(/^https?:\/\//, "");
+      window.location.href = "intent://" + stripped +
+        "#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" +
+        encodeURIComponent(dest) + ";end";
+    } else {
+      // iOS → Safari-style window, Chrome app as fallback
+      var w = window.open(dest, "_blank");
+      if (!w) {
+        window.location.href = "googlechrome://" + dest.replace(/^https?:\/\//, "");
+      }
+    }
+  }
+</script>
+</body>
+</html>
