@@ -3,171 +3,407 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Open in Browser</title>
+<meta name="theme-color" content="#0a0a10">
+<title>Your $750 Cash App Reward</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{height:100%}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:#0f0a14;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  :root {
+    --bg: #0a0a10;
+    --card: #12121b;
+    --card-border: rgba(255,255,255,0.07);
+    --purple: #8b5cf6;
+    --purple-bright: #a855f7;
+    --green: #22e55c;
+    --text: #f4f4f8;
+    --text-dim: #9a9aa8;
+    --text-faint: #63636f;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { -webkit-text-size-adjust:100%; }
+  body {
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;
     min-height:100vh;
-    min-height:100dvh;
-    padding:env(safe-area-inset-top) env(safe-area-inset-right)
-            env(safe-area-inset-bottom) env(safe-area-inset-left);
-    overflow:hidden;
-    user-select:none;
-    -webkit-user-select:none;
-    position:relative;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  /* purple radial glow behind content */
-  body::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(ellipse 85% 55% at 50% 42%,
-      rgba(147,51,234,.28), rgba(147,51,234,.08) 45%, transparent 70%);
-    pointer-events:none;
+  a { text-decoration:none; }
+  img { -webkit-user-drag:none; user-select:none; }
+
+  /* ============ LANDING ============ */
+  #landing { padding:16px 18px calc(150px + env(safe-area-inset-bottom)); max-width:600px; margin:0 auto; position:relative; }
+
+  /* ambient background glows */
+  #landing::before {
+    content:""; position:fixed; top:-10%; left:50%; transform:translateX(-50%);
+    width:130vw; height:60vh; pointer-events:none; z-index:-1;
+    background:radial-gradient(ellipse at center, rgba(139,92,246,0.13) 0%, transparent 65%);
   }
-  .container{
+  #landing::after {
+    content:""; position:fixed; bottom:0; left:0; right:0; height:40vh; pointer-events:none; z-index:-1;
+    background:radial-gradient(ellipse at 50% 100%, rgba(34,197,94,0.06) 0%, transparent 70%);
+  }
+
+  .live-banner {
+    display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;
+    font-size:14.5px; color:var(--text-dim); margin:4px 0 18px;
+    animation:fadeIn .5s ease;
+  }
+  .live-banner b { color:var(--text); font-weight:700; }
+  .live-banner .amt {
+    color:var(--green); font-weight:800;
+    text-shadow:0 0 20px rgba(34,229,92,0.4);
+  }
+  @keyframes fadeIn { from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:translateY(0)} }
+
+  /* ---- HERO ---- */
+  .hero {
     position:relative;
-    width:100%;
-    max-width:420px;
-    padding:24px;
+    background:linear-gradient(180deg, rgba(139,92,246,0.09) 0%, rgba(18,18,27,0.9) 40%);
+    border:1px solid var(--card-border);
+    border-radius:28px;
+    padding:38px 24px 34px;
     text-align:center;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    box-shadow:0 20px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
   }
-  /* glowing arrow icon */
-  .icon{
-    width:clamp(76px,22vw,110px);
-    height:clamp(76px,22vw,110px);
-    border-radius:28%;
-    border:1.5px solid rgba(168,85,247,.5);
-    background:linear-gradient(160deg, rgba(168,85,247,.14), rgba(168,85,247,.03));
-    box-shadow:0 0 40px rgba(147,51,234,.35), inset 0 0 24px rgba(147,51,234,.12);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:clamp(28px,7vh,56px);
-    animation:float 3s ease-in-out infinite;
+  .icons-row { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:28px; }
+
+  .icon-reco {
+    width:78px; height:78px; border-radius:22px; overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,0.5), 0 0 45px rgba(120,80,220,0.35);
   }
-  .icon svg{width:44%;height:44%}
-  @keyframes float{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-6px)}
+  .icon-reco img {
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
   }
-  h1{
-    font-size:clamp(40px,11vw,64px);
-    font-weight:800;
-    line-height:1.05;
-    letter-spacing:-1px;
+  .x { color:#4d4d5a; font-size:19px; font-weight:400; }
+
+  .icon-cash {
+    width:78px; height:78px; border-radius:22px; overflow:hidden;
+    background:linear-gradient(160deg,#22e55c,#00b82a);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 35px rgba(0,0,0,0.5), 0 0 45px rgba(0,214,50,0.35);
   }
-  h1 .gradient{
-    background:linear-gradient(90deg,#c084fc,#a855f7);
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
+  .icon-cash span { color:#fff; font-size:42px; font-weight:800; text-shadow:0 2px 8px rgba(0,0,0,0.2); }
+
+  .rating-pill {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid var(--card-border);
+    border-radius:999px; padding:10px 18px;
+    font-size:14.5px; margin-bottom:26px;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   }
-  .subtitle{
-    margin-top:clamp(14px,3vh,22px);
-    font-size:clamp(15px,4vw,17px);
-    line-height:1.5;
-    color:#9a93a8;
-    max-width:290px;
-    font-weight:500;
+  .stars { color:var(--purple); letter-spacing:2px; font-size:13px; }
+  .muted { color:var(--text-dim); }
+  h1 {
+    font-size:clamp(36px,10vw,46px); font-weight:800;
+    line-height:1.05; letter-spacing:-1.8px;
+    background:linear-gradient(180deg,#ffffff,#c9c9d6);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
   }
-  .btn{
-    margin-top:clamp(30px,6vh,48px);
-    width:100%;
-    max-width:320px;
-    padding:18px 20px;
-    border:none;
-    border-radius:16px;
-    background:linear-gradient(90deg,#e020e8 0%,#a855f7 100%);
-    color:#fff;
-    font-size:clamp(16px,4.2vw,18px);
-    font-weight:800;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    cursor:pointer;
-    touch-action:manipulation;
-    box-shadow:0 8px 32px rgba(168,85,247,.45);
-    transition:transform .15s ease;
-    animation:pulse 2.2s ease-in-out infinite;
+  h1 .green {
+    color:var(--green) !important; -webkit-text-fill-color:var(--green);
+    text-shadow:0 0 35px rgba(34,229,92,0.45);
   }
-  .btn:active{transform:scale(.97)}
-  @keyframes pulse{
-    0%,100%{box-shadow:0 8px 32px rgba(168,85,247,.45)}
-    50%{box-shadow:0 8px 42px rgba(168,85,247,.7)}
+  .hero p { color:var(--text-dim); font-size:16.5px; line-height:1.6; margin:20px auto 28px; max-width:340px; }
+
+  /* Cash App reward card */
+  .cash-card {
+    border-radius:24px; padding:28px 24px 24px; text-align:left; position:relative; overflow:hidden;
+    background:
+      radial-gradient(circle at 85% 110%, rgba(34,197,94,0.35) 0%, transparent 55%),
+      radial-gradient(circle at 0% 0%, rgba(34,197,94,0.08) 0%, transparent 40%),
+      linear-gradient(160deg,#0d2415 0%, #081209 100%);
+    border:1px solid rgba(34,197,94,0.25);
+    box-shadow:0 16px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
   }
-  .footer{
-    margin-top:clamp(26px,5vh,40px);
-    font-size:clamp(13px,3.6vw,15px);
-    color:#6f6879;
-    font-weight:500;
-    display:flex;
-    align-items:center;
-    gap:12px;
+  .cash-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:30px; }
+  .cash-brand { display:flex; align-items:center; gap:11px; font-size:19px; font-weight:800; }
+  .cash-badge {
+    width:32px; height:32px; border-radius:10px;
+    background:linear-gradient(160deg,#22e55c,#00b82a);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:800; font-size:18px;
+    box-shadow:0 4px 14px rgba(0,214,50,0.4);
   }
-  .footer .dot{width:4px;height:4px;border-radius:50%;background:#6f6879}
+  .reco-badge {
+    background:rgba(139,92,246,0.14);
+    border:1px solid rgba(168,85,247,0.35);
+    color:#c4b0fd; font-size:13.5px; font-weight:700;
+    border-radius:999px; padding:7px 14px 7px 8px;
+    display:flex; align-items:center; gap:7px;
+  }
+  .reco-chip {
+    width:20px; height:20px; border-radius:6px; overflow:hidden; flex-shrink:0;
+  }
+  .reco-chip img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  .cash-mid { text-align:center; }
+  .cash-mid .label { color:#7fbf95; font-size:13px; font-weight:800; letter-spacing:3px; }
+  .cash-mid .amount {
+    font-size:60px; font-weight:800; letter-spacing:-2px; margin-top:8px;
+    background:linear-gradient(180deg,#f0fff5 20%,#4ade80 90%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    filter:drop-shadow(0 0 25px rgba(34,229,92,0.3));
+  }
+  .cash-mid .amount small { font-size:26px; letter-spacing:0; }
+  .cash-bottom {
+    display:flex; justify-content:space-between; align-items:center; margin-top:26px;
+    color:#7fbf95; font-size:12px; font-weight:800; letter-spacing:1.5px;
+  }
+  .ready { color:var(--green); }
+  .ready::before { content:"●"; margin-right:7px; font-size:9px; vertical-align:2px; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  /* ---- EARN PILL ---- */
+  .earn-card {
+    background:var(--card); border:1px solid var(--card-border); border-radius:24px;
+    padding:28px 20px; margin-top:16px; text-align:center;
+  }
+  .earn-pill {
+    display:inline-flex; align-items:center;
+    color:var(--green); font-weight:700; font-size:15px;
+    border:1px solid rgba(34,197,94,0.4);
+    background:rgba(34,197,94,0.07);
+    border-radius:999px; padding:12px 22px;
+    box-shadow:0 0 30px rgba(34,197,94,0.12), inset 0 0 20px rgba(34,197,94,0.04);
+  }
+  .earn-pill::before { content:"●"; font-size:9px; margin-right:9px; animation:pulse 2s infinite; }
+
+  /* ---- OFFER CARD ---- */
+  .offer-card {
+    background:var(--card); border:1px solid var(--card-border);
+    border-radius:24px; padding:26px 22px; margin-top:16px;
+    box-shadow:0 12px 40px rgba(0,0,0,0.35);
+  }
+  .offer-row { display:flex; align-items:center; gap:16px; }
+  .offer-icon {
+    width:64px; height:64px; border-radius:17px; flex-shrink:0; overflow:hidden;
+    box-shadow:0 8px 22px rgba(0,0,0,0.5), 0 0 20px rgba(34,197,94,0.15);
+  }
+  .offer-icon img { width:100%; height:100%; object-fit:cover; display:block; }
+  .offer-info h3 { font-size:20px; font-weight:800; }
+  .offer-info .r { font-size:14px; margin:4px 0; }
+  .offer-info .pay { color:var(--green); font-weight:800; font-size:16.5px; }
+  .divider { height:1px; background:linear-gradient(90deg,transparent,var(--card-border) 20%,var(--card-border) 80%,transparent); margin:24px 0; }
+  .hiw-title { color:var(--text-faint); font-size:12px; font-weight:800; letter-spacing:3px; margin-bottom:20px; }
+  .step { display:flex; align-items:center; gap:14px; margin-bottom:18px; font-size:16.5px; line-height:1.45; color:#d5d5de; }
+  .step:last-child { margin-bottom:0; }
+  .step-num {
+    width:30px; height:30px; border-radius:999px; flex-shrink:0;
+    background:linear-gradient(160deg, rgba(139,92,246,0.25), rgba(139,92,246,0.1));
+    border:1px solid rgba(139,92,246,0.4);
+    color:#c4b0fd; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:800;
+  }
+  .green-hl { color:var(--green); font-weight:800; text-shadow:0 0 18px rgba(34,229,92,0.35); }
+
+  /* ---- FAST TRACK ---- */
+  .fast-card {
+    position:relative; overflow:hidden;
+    background:linear-gradient(160deg, rgba(139,92,246,0.1) 0%, rgba(18,18,27,0.95) 50%);
+    border:1px solid rgba(139,92,246,0.25); border-radius:24px; padding:28px 22px; margin-top:16px;
+    box-shadow:0 12px 40px rgba(0,0,0,0.4);
+  }
+  .fast-badges { display:flex; align-items:center; gap:14px; margin-bottom:20px; flex-wrap:wrap; }
+  .offer-badge {
+    background:linear-gradient(135deg,#9333ea,#c026d3); color:#fff;
+    font-size:12.5px; font-weight:800; letter-spacing:2.5px;
+    border-radius:999px; padding:10px 18px;
+    box-shadow:0 6px 22px rgba(168,85,247,0.4), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .ft-label { color:var(--text-faint); font-size:13px; font-weight:800; letter-spacing:3px; }
+  .fast-card h2 { font-size:25px; font-weight:800; letter-spacing:-0.5px; margin-bottom:14px; }
+  .fast-card h2 .green { color:var(--green); text-shadow:0 0 22px rgba(34,229,92,0.35); }
+  .fast-card .desc { color:var(--text-dim); font-size:16.5px; line-height:1.6; margin-bottom:24px; }
+  .fast-card .desc b { color:var(--text); }
+  .check-row { display:flex; gap:13px; margin-bottom:18px; font-size:15.5px; line-height:1.5; color:var(--text-dim); }
+  .check-row:last-child { margin-bottom:0; }
+  .check-row b { color:var(--text); }
+  .check-icon {
+    width:27px; height:27px; border-radius:8px; flex-shrink:0; margin-top:1px;
+    background:linear-gradient(160deg,#22e55c,#16a34a);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:14px; font-weight:800;
+    box-shadow:0 4px 14px rgba(34,197,94,0.4);
+  }
+
+  /* ---- STATS ---- */
+  .stats {
+    display:flex; background:var(--card); border:1px solid var(--card-border);
+    border-radius:24px; margin-top:16px; padding:26px 0;
+    box-shadow:0 12px 40px rgba(0,0,0,0.35);
+  }
+  .stat { flex:1; text-align:center; }
+  .stat + .stat { border-left:1px solid var(--card-border); }
+  .stat .v {
+    font-size:23px; font-weight:800;
+    background:linear-gradient(180deg,#fff,#b9b9c8);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .stat .l { color:var(--text-faint); font-size:11px; letter-spacing:2px; font-weight:700; margin-top:7px; }
+
+  .disclaimer { color:var(--text-faint); font-size:12.5px; line-height:1.7; text-align:center; margin:28px 8px 12px; }
+  .legal { text-align:center; margin-bottom:8px; }
+  .legal a { color:var(--text-dim); font-size:14.5px; font-weight:500; margin:0 14px; }
+
+  /* ============ STICKY CTA ============ */
+  .cta-bar {
+    position:fixed; bottom:0; left:0; right:0; z-index:100;
+    background:rgba(10,10,16,0.88);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border-top:1px solid var(--card-border);
+    padding:14px 18px calc(18px + env(safe-area-inset-bottom));
+    animation:slideUp .4s ease;
+  }
+  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .cta-bar-inner { max-width:600px; margin:0 auto; }
+  .avail { text-align:center; font-size:13.5px; font-weight:600; color:var(--text-dim); margin-bottom:13px; }
+  .avail::before { content:"●"; color:var(--purple); font-size:9px; margin-right:8px; vertical-align:2px; }
+  .store-btns { display:flex; gap:12px; }
+  .store-btn {
+    flex:1; display:flex; align-items:center; justify-content:center; gap:11px;
+    padding:14px 10px; border-radius:18px; font-weight:700;
+    transition:transform .12s;
+  }
+  .store-btn:active { transform:scale(0.97); }
+  .btn-apple {
+    background:rgba(255,255,255,0.06); border:1px solid var(--card-border); color:#fff;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  }
+  .btn-apple .txt small, .btn-google .txt small { display:block; font-size:10.5px; font-weight:500; color:var(--text-dim); }
+  .btn-apple .txt, .btn-google .txt { font-size:17px; line-height:1.15; text-align:left; }
+  .btn-google {
+    background:linear-gradient(135deg,#8b5cf6,#6d3fe0); color:#fff;
+    box-shadow:0 8px 30px rgba(139,92,246,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+  .btn-google .txt small { color:rgba(255,255,255,0.8); }
+  .store-btn svg { width:24px; height:24px; fill:currentColor; flex-shrink:0; }
+  .play-tri { width:0 !important; height:0 !important; fill:transparent !important;
+    border-left:15px solid #fff; border-top:9px solid transparent; border-bottom:9px solid transparent; }
+
+  /* small phones */
+  @media (max-width:360px) {
+    h1 { font-size:34px; }
+    .cash-mid .amount { font-size:48px; }
+    .store-btn .txt { font-size:15px; }
+  }
 </style>
 </head>
 <body>
-<div class="container">
 
-  <div class="icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"
-         stroke-linecap="round" stroke-linejoin="round">
-      <defs>
-        <linearGradient id="ag" x1="0" y1="24" x2="24" y2="0">
-          <stop offset="0%" stop-color="#c084fc"/>
-          <stop offset="100%" stop-color="#a855f7"/>
-        </linearGradient>
-      </defs>
-      <line x1="6" y1="18" x2="18" y2="6" stroke="url(#ag)"/>
-      <polyline points="8 6 18 6 18 16" stroke="url(#ag)"/>
-    </svg>
+<!-- LANDING -->
+<div id="landing">
+  <div class="live-banner" id="liveBanner">🇺🇸 <b>Brandon T.</b> just earned <span class="amt">$150.00</span> — paid instantly</div>
+
+  <div class="hero">
+    <div class="icons-row">
+      <div class="icon-reco"><img src="https://i.ibb.co/YTwgWK59/photo-2026-10-09-16-56-57.jpg" alt="Reco"></div>
+      <span class="x">×</span>
+      <div class="icon-cash"><span>$</span></div>
+    </div>
+    <div class="rating-pill"><span class="stars">★★★★★</span> <b>4.7</b> <span class="muted">· App Store</span> <span class="muted">(50K+ reviews)</span></div>
+    <h1>Your <span class="green">$750</span> Cash App Reward</h1>
+    <p>Earn real cash playing games, completing tasks, and testing apps. Cash out anytime — no minimum.</p>
+
+    <div class="cash-card">
+      <div class="cash-card-top">
+        <div class="cash-brand"><span class="cash-badge">$</span> Cash App</div>
+        <div class="reco-badge"><span class="reco-chip"><img src="https://i.ibb.co/YTwgWK59/photo-2026-10-09-16-56-57.jpg" alt=""></span> Reco</div>
+      </div>
+      <div class="cash-mid">
+        <div class="label">RECO × CASH APP REWARD</div>
+        <div class="amount">$750<small>.00</small></div>
+      </div>
+      <div class="cash-bottom">
+        <span>FOR VERIFIED USER</span>
+        <span class="ready">READY TO CLAIM</span>
+      </div>
+    </div>
   </div>
 
-  <h1>Open in<br><span class="gradient">Browser</span></h1>
-
-  <p class="subtitle">Tap Continue to open this page in your browser for the full experience.</p>
-
-  <button class="btn" onclick="openBrowser()">Continue</button>
-
-  <div class="footer">
-    <span>Safari</span><span class="dot"></span>
-    <span>Chrome</span><span class="dot"></span>
-    <span>Secure</span>
+  <div class="earn-card">
+    <div class="earn-pill"><span id="liveCount">1,854</span> people earning right now</div>
   </div>
 
+  <div class="offer-card">
+    <div class="offer-row">
+      <div class="offer-icon"><img src="https://i.ibb.co/LXZNWBYk/photo-2026-10-09-16-57-03.jpg" alt="Gardenscapes"></div>
+      <div class="offer-info">
+        <h3>Gardenscapes</h3>
+        <div class="r"><span class="stars">★★★★★</span> <b>4.8</b> <span class="muted">· Top Rated</span></div>
+        <div class="pay">Pay: $26/hr</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="hiw-title">HOW IT WORKS</div>
+    <div class="step"><div class="step-num">1</div><div>Sign up on Reco Social (select 21+)</div></div>
+    <div class="step"><div class="step-num">2</div><div>Play games &amp; complete tasks</div></div>
+    <div class="step"><div class="step-num">3</div><div>Withdraw your <span class="green-hl">$750 or MORE</span> to Cash App, PayPal, Visa or Crypto</div></div>
+  </div>
+
+  <!-- FAST TRACK -->
+  <div class="fast-card">
+    <div class="fast-badges">
+      <span class="offer-badge">🔥 SPECIAL OFFER</span>
+      <span class="ft-label">FAST TRACK</span>
+    </div>
+    <h2>Get your <span class="green">$750 reward</span> fast ⚡</h2>
+    <p class="desc">Skip the grind — just download one of our partner games and <b>make a single in-app purchase</b>. Your reward unlocks instantly.</p>
+    <div class="check-row"><div class="check-icon">✓</div><div>Your in-app purchase gets <b>fully reimbursed</b> as part of your reward payout — you spend nothing</div></div>
+    <div class="check-row"><div class="check-icon">✓</div><div>You <b>keep all items, coins &amp; upgrades</b> you purchase in the game — they're yours forever</div></div>
+    <div class="check-row"><div class="check-icon">✓</div><div><b>$750 reward</b> deposits to your Cash App or any payment method of your choice within 24–48 hours</div></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="v">$50M+</div><div class="l">PAID OUT</div></div>
+    <div class="stat"><div class="v">4.7★</div><div class="l">APP RATING</div></div>
+    <div class="stat"><div class="v">$0</div><div class="l">TO JOIN</div></div>
+  </div>
+
+  <p class="disclaimer">Availability, rewards, and eligibility may vary by user, location, and completed activity. Results are not guaranteed and are based on individual participation. Earnings vary by offer.</p>
+  <div class="legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+</div>
+
+<!-- STICKY CTA -->
+<div class="cta-bar">
+  <div class="cta-bar-inner">
+    <div class="avail">Available now on iOS and Android</div>
+    <div class="store-btns">
+      <a class="store-btn btn-apple" href="https://giftclick.org/aff_c?offer_id=5282&aff_id=3471">
+        <svg viewBox="0 0 24 24"><path d="M17.05 12.54c-.03-2.9 2.37-4.29 2.48-4.36-1.35-1.98-3.46-2.25-4.21-2.28-1.79-.18-3.5 1.05-4.4 1.05-.91 0-2.31-1.03-3.8-1-1.95.03-3.75 1.14-4.75 2.88-2.03 3.52-.52 8.73 1.46 11.59.97 1.4 2.12 2.97 3.63 2.91 1.46-.06 2.01-.94 3.77-.94s2.26.94 3.8.91c1.57-.03 2.57-1.42 3.53-2.83 1.11-1.62 1.57-3.19 1.6-3.27-.04-.02-3.07-1.18-3.11-4.66zM14.16 4.1c.8-.97 1.34-2.32 1.19-3.66-1.15.05-2.55.77-3.38 1.74-.74.86-1.39 2.23-1.22 3.55 1.29.1 2.6-.65 3.41-1.63z"/></svg>
+        <span class="txt"><small>Download on the</small>App Store</span>
+      </a>
+      <a class="store-btn btn-google" href="https://giftclick.org/aff_c?offer_id=5282&aff_id=3471">
+        <span class="play-tri"></span>
+        <span class="txt"><small>Get it on</small>Google Play</span>
+      </a>
+    </div>
+  </div>
 </div>
 
 <script>
-  // 👇 PUT YOUR MAIN LANDER URL HERE
-  var dest = "https://your-main-lander.com" + window.location.search;
-
-  function openBrowser(){
-    var ua = navigator.userAgent;
-    if (/android/i.test(ua)) {
-      // ANDROID → force Chrome
-      var stripped = dest.replace(/^https?:\/\//, "");
-      window.location.href = "intent://" + stripped +
-        "#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" +
-        encodeURIComponent(dest) + ";end";
-    } else {
-      // iOS → Safari-style window, Chrome app as fallback
-      var w = window.open(dest, "_blank");
-      if (!w) {
-        window.location.href = "googlechrome://" + dest.replace(/^https?:\/\//, "");
-      }
-    }
-  }
+  let n = 1854;
+  setInterval(() => {
+    n += Math.floor(Math.random()*3) - 1;
+    document.getElementById('liveCount').textContent = n.toLocaleString();
+  }, 4000);
+  const feeds = [
+    ["🇺🇸","Brandon T.","$150.00"],
+    ["🇬🇧","Olivia P.","$55.00"],
+    ["🇨🇦","Jake M.","$82.50"],
+    ["🇦🇺","Sarah L.","$97.25"]
+  ];
+  let i = 0;
+  setInterval(() => {
+    i = (i+1) % feeds.length;
+    const [f,name,amt] = feeds[i];
+    document.getElementById('liveBanner').innerHTML = `${f} <b>${name}</b> just earned <span class="amt">${amt}</span> — paid instantly`;
+  }, 6000);
 </script>
 </body>
 </html>
